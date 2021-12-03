@@ -1,0 +1,25 @@
+---
+title: "Tutorial_LinearRegression"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tutorial_LinearRegression}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(LinReg.Select)
+```
+
+To fit a linear regression model:
+```{r}
+LinearRegssion(mpg ~ cyl + disp + hp, data = mtcars)
+```
+

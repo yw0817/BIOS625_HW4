@@ -1,0 +1,11 @@
+test_that("LinearReg works", {
+    my.result = LinearRegssion(mpg ~ cyl + disp + hp + cyl*disp, data = mtcars)
+    ref = lm(mpg ~ cyl + disp + hp + cyl*disp, data = mtcars)
+    expect_equal(my.result$coefficients, ref$coefficients)
+    expect_equal(my.result$residuals, ref$residuals)
+    expect_equal(my.result$fitted.values, ref$fitted.values)
+    expect_equal(my.result$rank, ref$rank)
+    expect_equal(my.result$df, ref$df)
+    expect_equal(my.result$`Multiple R-squared`, summary(ref)$r.squared)
+    expect_equal(my.result$`Adjusted R-squared`, summary(ref)$adj.r.squared)
+})
