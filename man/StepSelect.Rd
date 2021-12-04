@@ -4,7 +4,7 @@
 \alias{StepSelect}
 \title{Step Selection}
 \usage{
-StepSelect(full, direction, k = 2)
+StepSelect(full, direction, k = 2, trace = FALSE)
 }
 \arguments{
 \item{full}{the full model for backward selection to start and the upper limit for forward selection}
@@ -23,6 +23,6 @@ Conduct forward or backward selection for linear regression models
 full_lm = lm(mpg ~ ., data = mtcars)
 n = dim(mtcars)[1]
 StepSelect(full_lm, direction = "forward", k = log(n))
-StepSelect(full_lm, direction = "backward", k = log(n))
+StepSelect(full_lm, direction = "backward", trace = TRUE)
 
 }

@@ -32,6 +32,11 @@ my.lm$`Multiple R-squared`
 my.lm$`Adjusted R-squared`
 ```
 
+The function can also take interaction terms or terms with power:
+```{r}
+my.lm2 = LinearReg(mpg ~ cyl + disp + hp + cyl*disp + I(hp^2), data = mtcars)
+```
+
 ### StepSelect
 
 #### Backward Selection
@@ -59,5 +64,10 @@ StepSelect(full_lm, direction = "backward", k = log(n), trace = TRUE)
 To conduct forward selection:
 ```{r}
 StepSelect(full_lm, direction = "forward")
+```
+
+Similarly, users can also define k and trace:
+```{r}
+StepSelect(full_lm, direction = "forward", k = log(n), trace = TRUE)
 ```
 
