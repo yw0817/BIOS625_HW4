@@ -2,7 +2,7 @@
 title: "Tutorial of LinearRegression and StepSelect"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Tutorial_LinReg_StepSel}
+  %\VignetteIndexEntry{Tutorial of LinearRegression and StepSelect}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

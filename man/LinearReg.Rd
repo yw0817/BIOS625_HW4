@@ -18,7 +18,7 @@ a summary of the linear regression model including the residual statistics, coef
 Fit a linear regression model
 }
 \examples{
-LinearRegssion(mpg ~ cyl + disp + hp, data = mtcars)
-LinearRegssion(mpg ~ cyl + disp + cyl*disp, data = mtcars)
+LinearReg(mpg ~ cyl + disp + hp, data = mtcars)
+LinearReg(mpg ~ cyl + disp + cyl*disp, data = mtcars)
 
 }

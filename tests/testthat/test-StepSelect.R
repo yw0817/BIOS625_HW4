@@ -1,4 +1,5 @@
 test_that("StepSelect works", {
+    install.packages("MASS")
     library(MASS)
     full_lm <- lm(mpg ~ ., data = mtcars)
     n = dim(mtcars)[1]

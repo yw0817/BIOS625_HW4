@@ -8,8 +8,8 @@
 #'@return a summary of the linear regression model including the residual statistics, coefficients, statistics values (t and F), p-values, and degrees of freedoms
 #'
 #'@examples
-#'LinearRegssion(mpg ~ cyl + disp + hp, data = mtcars)
-#'LinearRegssion(mpg ~ cyl + disp + cyl*disp, data = mtcars)
+#'LinearReg(mpg ~ cyl + disp + hp, data = mtcars)
+#'LinearReg(mpg ~ cyl + disp + cyl*disp, data = mtcars)
 #'
 #'@export
 #'
