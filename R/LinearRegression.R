@@ -9,6 +9,7 @@
 #'
 #'@examples
 #'LinearRegssion(mpg ~ cyl + disp + hp, data = mtcars)
+#'LinearRegssion(mpg ~ cyl + disp + cyl*disp, data = mtcars)
 #'
 #'@export
 #'
@@ -16,11 +17,11 @@ LinearRegssion = function(theModel, data){
     data = data[complete.cases(data[,all.vars(theModel)]),]
     Y = data[[all.vars(theModel)[1]]]
     X = model.matrix(theModel, data)
-
     n = dim(data)[1]
     # beta coefficients
     coeffs = solve(t(X) %*% X) %*% t(X) %*% Y
     Y.hat = X %*% coeffs
+    # standard errors
     sigma.sq = sum((Y - Y.hat)^2)/(n - length(coeffs))
     # beta standard errors
     std.errs = sqrt(diag(sigma.sq * solve(t(X) %*% X)))
@@ -28,10 +29,15 @@ LinearRegssion = function(theModel, data){
     t.vals = coeffs/std.errs
     # p-values
     p.vals = 2 * pt(abs(t.vals), df = n - length(t.vals), lower.tail = FALSE)
-    p.vals = ifelse(p.vals < 2e-16, "<2e-16", round(p.vals, 3))
-
+    p.vals = ifelse(p.vals < 2e-16, "<2e-16", p.vals)
+    # R squared
     SSE = sum((Y - Y.hat)^2)
-    SSY = sum((Y - mean(Y))^2)
+    # check if intercept is included
+    if ("(Intercept)" %in% colnames(X)) {
+        SSY = sum((Y - mean(Y))^2)
+    }else {
+        SSY = sum(Y^2)
+    }
     R.sq = 1 - SSE/SSY
     adj.R.sq = 1 - (SSE/(n - length(t.vals)))/(SSY/(n-1))
     # F statistics
@@ -44,7 +50,7 @@ LinearRegssion = function(theModel, data){
     res.table = as.table(res.table)
     rownames(res.table) = c("Min", "1Q", "Median", "3Q", "Max")
     result[["Residuals:"]] = res.table
-    result.df = data.frame("Variable" = colnames(X), "Estimate" = coeffs, "Std.Error" = std.errs, "t value" = t.vals, "Pr(>|t|)" = p.vals)
+    result.df = data.frame("Estimate" = coeffs, "Std.Error" = std.errs, "t value" = t.vals, "Pr(>|t|)" = p.vals)
     result[["Coefficients:"]] = result.df
     result[["Residual standard error:"]] = paste("Residual standard error: ", round((sqrt(sigma.sq)), 2), " on ", (n - length(t.vals)), " degrees of freedom")
     result[["R-squared:"]] = paste("Multiple R-squared:  ", round(R.sq, 4), ", Adjusted R-squared:  ", round(adj.R.sq, 4))
@@ -60,6 +66,6 @@ LinearRegssion = function(theModel, data){
     ret.result[["call"]] = match.call()
     ret.result[["Multiple R-squared"]] = R.sq
     ret.result[["Adjusted R-squared"]] = adj.R.sq
-    class(ret.result) <- c("lm")
+    class(ret.result) = c("lm")
     return(ret.result)
 }

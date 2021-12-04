@@ -19,5 +19,6 @@ Fit a linear regression model
 }
 \examples{
 LinearRegssion(mpg ~ cyl + disp + hp, data = mtcars)
+LinearRegssion(mpg ~ cyl + disp + cyl*disp, data = mtcars)
 
 }
