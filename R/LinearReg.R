@@ -13,7 +13,7 @@
 #'
 #'@export
 #'
-LinearRegssion = function(theModel, data){
+LinearReg = function(theModel, data){
     data = data[complete.cases(data[,all.vars(theModel)]),]
     Y = data[[all.vars(theModel)[1]]]
     X = model.matrix(theModel, data)

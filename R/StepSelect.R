@@ -12,11 +12,11 @@
 #'full_lm = lm(mpg ~ ., data = mtcars)
 #'n = dim(mtcars)[1]
 #'StepSelect(full_lm, direction = "forward", k = log(n))
-#'StepSelect(full_lm, direction = "backward", k = log(n))
+#'StepSelect(full_lm, direction = "backward", trace = TRUE)
 #'
 #'@export
 #'
-StepSelect = function(full, direction, k = 2){
+StepSelect = function(full, direction, k = 2, trace = FALSE){
     # extract data
     data = model.frame(full)
     # extract X and Y names
@@ -40,6 +40,9 @@ StepSelect = function(full, direction, k = 2){
                 newform = as.formula(paste(Ynam, " ~ ", paste(Xnam, collapse= "+")))
                 # update the current full model
                 full = eval(bquote(lm(.(newform), data = data)))
+                if (trace == TRUE){
+                    print(full)
+                }
             }else{
                 # if the current AIC of the full model is the smallest, no improvement can be made -> break
                 break
@@ -69,6 +72,9 @@ StepSelect = function(full, direction, k = 2){
                 newform = as.formula(paste(Ynam, " ~ ", paste(Xselect, collapse= "+")))
                 # update the null model
                 nullmodel = eval(bquote(lm(.(newform), data = data)))
+                if (trace == TRUE){
+                    print(nullmodel)
+                }
             }else {
                 # if the current AIC of the null model is the smallest, no improvement can be made -> break
                 break

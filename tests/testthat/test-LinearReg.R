@@ -1,5 +1,5 @@
 test_that("LinearReg works", {
-    my.result = LinearRegssion(mpg ~ cyl + disp + hp + cyl*disp, data = mtcars)
+    my.result = LinearReg(mpg ~ cyl + disp + hp + cyl*disp, data = mtcars)
     ref = lm(mpg ~ cyl + disp + hp + cyl*disp, data = mtcars)
     expect_equal(my.result$coefficients, ref$coefficients)
     expect_equal(my.result$residuals, ref$residuals)

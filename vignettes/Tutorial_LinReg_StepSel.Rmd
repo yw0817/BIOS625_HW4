@@ -1,0 +1,26 @@
+---
+title: "Tutorial of LinearRegression and StepSelect"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tutorial_LinReg_StepSel}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(LinReg.Select)
+```
+
+When fitting a linear regression model, it will also automatically generate a summary for the result of the linear regression:
+
+```{r}
+my.lm = LinearRegssion(mpg ~ cyl + disp + hp, data = mtcars)
+```
+
