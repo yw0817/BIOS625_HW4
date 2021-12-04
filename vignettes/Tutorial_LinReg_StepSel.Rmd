@@ -18,9 +18,46 @@ knitr::opts_chunk$set(
 library(LinReg.Select)
 ```
 
-When fitting a linear regression model, it will also automatically generate a summary for the result of the linear regression:
+### LinearReg
 
+When fitting a linear regression model, it will also automatically generate a summary for the result of the linear regression:
 ```{r}
-my.lm = LinearRegssion(mpg ~ cyl + disp + hp, data = mtcars)
+my.lm = LinearReg(mpg ~ cyl + disp + hp, data = mtcars)
+```
+
+Some features, like residuals, fitted values, R square, adjusted R square, etc., can also be retrieved from the function:
+```{r}
+plot(my.lm$fitted.values, my.lm$residuals)
+my.lm$`Multiple R-squared`
+my.lm$`Adjusted R-squared`
+```
+
+### StepSelect
+
+#### Backward Selection
+
+To conduct backward selection:
+```{r}
+full_lm = lm(mpg ~ ., data = mtcars)
+StepSelect(full_lm, direction = "backward")
+```
+
+k is the penalty used in AIC, the default is 2 but it can be defined by users:
+```{r}
+n = dim(mtcars)[1]
+StepSelect(full_lm, direction = "backward", k = log(n))
+```
+
+Users can also trace the whole process by turning on the trace option:
+```{r}
+StepSelect(full_lm, direction = "backward", k = log(n), trace = TRUE)
+```
+
+
+#### Forward Selection
+
+To conduct forward selection:
+```{r}
+StepSelect(full_lm, direction = "forward")
 ```
 
