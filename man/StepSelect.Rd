@@ -12,6 +12,8 @@ StepSelect(full, direction, k = 2, trace = FALSE)
 \item{direction}{should be either "backward" or "forward"}
 
 \item{k}{numeric, the penalty per parameter to be used in AIC; the default k = 2 is the classical AIC.}
+
+\item{trace}{to determine if the process of selection will be shown or not}
 }
 \value{
 the final linear regression result after selection
@@ -20,7 +22,9 @@ the final linear regression result after selection
 Conduct forward or backward selection for linear regression models
 }
 \examples{
-StepSelect(lm(mpg ~ ., data = mtcars), direction = "forward")
-StepSelect(lm(mpg ~ ., data = mtcars), direction = "backward")
+full_lm = lm(mpg ~ ., data = mtcars)
+n = dim(mtcars)[1]
+StepSelect(full_lm, direction = "forward", k = log(n))
+StepSelect(full_lm, direction = "backward", trace = TRUE)
 
 }
