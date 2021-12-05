@@ -25,7 +25,7 @@ For example, LinearReg(mpg ~ cyl + disp + hp + cyl*disp + I(hp^2), data = mtcars
 
 ### Tutorial for StepSelect
 
-StepSelect takes four parameters, `@param full` "full", `@param` "direction", `@param` "k" and `@param` "trace".
+StepSelect takes four parameters, `@param full`, `@direction` "direction", `@param` "k" and `@param` "trace".
 
 `@param` "full" is the full model which backward selection process starts from or the upper limit model for forward selection. For example, full = lm(mpg ~ ., data = mtcars).
 
