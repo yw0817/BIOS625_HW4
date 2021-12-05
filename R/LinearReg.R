@@ -58,8 +58,12 @@ LinearReg = function(theModel, data){
     print(result)
 
     ret.result = list()
+    coeffs = as.numeric(coeffs)
+    names(coeffs) = colnames(X)
     ret.result[["coefficients"]] = coeffs
     ret.result[["residuals"]] = Y - Y.hat
+    Y.hat = as.numeric(Y.hat)
+    names(Y.hat) = rownames(X)
     ret.result[["fitted.values"]] = Y.hat
     ret.result[["rank"]] = qr(X)$rank
     ret.result[["df"]] = n - length(t.vals)

@@ -37,6 +37,23 @@ The function can also take interaction terms or terms with power:
 my.lm2 = LinearReg(mpg ~ cyl + disp + hp + cyl*disp + I(hp^2), data = mtcars)
 ```
 
+```{r}
+ref = lm(mpg ~ cyl + disp + hp, data = mtcars)
+my.result = LinearReg(mpg ~ cyl + disp + hp, data = mtcars)
+
+all.equal(ref$coefficients, my.result$coefficients)
+all.equal(ref$fitted.values, my.result$fitted.values)
+```
+
+```{r}
+library(bench)
+result1 = bench::mark(LinearReg(mpg ~ cyl + disp + hp, data = mtcars)$`Multiple R-squared`, summary(lm(mpg ~ cyl + disp + hp, data = mtcars))$r.squared)
+print(result1)
+
+result2 = bench::mark(LinearReg(mpg ~ cyl + disp + hp, data = mtcars)$`Adjusted R-squared`, summary(lm(mpg ~ cyl + disp + hp, data = mtcars))$adj.r.squared)
+print(result2)
+```
+
 ### StepSelect
 
 #### Backward Selection
@@ -58,6 +75,20 @@ Users can also trace the whole process by turning on the trace option:
 StepSelect(full_lm, direction = "backward", k = log(n), trace = TRUE)
 ```
 
+To check the result of my backward selection function with the reference function stepAIC:
+```{r}
+ref = stepAIC(full_lm, direction = "backward", k = log(n), trace = FALSE)
+my = StepSelect(full_lm, direction = "backward", k = log(n), trace = FALSE)
+all.equal(ref$coefficients, my$coefficients)
+all.equal(ref$call$formula, my$call$formula)
+```
+
+To compare the efficiency of my backward selection function with stepAIC function:
+```{r}
+library(MASS)
+result = bench::mark(stepAIC(full_lm, direction = "backward", k = log(n), trace = FALSE)$coefficients, StepSelect(full_lm, direction = "backward", k = log(n), trace = FALSE)$coefficients, )
+print(result)
+```
 
 #### Forward Selection
 
@@ -69,5 +100,21 @@ StepSelect(full_lm, direction = "forward")
 Similarly, users can also define k and trace:
 ```{r}
 StepSelect(full_lm, direction = "forward", k = log(n), trace = TRUE)
+```
+
+To check the result of my backward selection function with the reference function stepAIC:
+```{r}
+m = lm(mpg ~ 1, data = mtcars)
+ref2 = stepAIC(m, direction="forward", k = log(n), scope=list(lower=m, upper=full_lm), trace = FALSE)
+my2 = StepSelect(full_lm, direction = "forward", k = log(n), trace = FALSE)
+all.equal(ref2$coefficients, my2$coefficients)
+all.equal(ref2$call$formula, my2$call$formula)
+```
+
+
+To compare the efficiency of my forward selection function with stepAIC function:
+```{r}
+result = bench::mark(stepAIC(m, direction="forward", k = log(n), scope=list(lower=m, upper=full_lm), trace = FALSE)$coefficients, my2 = StepSelect(full_lm, direction = "forward", k = log(n), trace = FALSE)$coefficients)
+print(result)
 ```
 

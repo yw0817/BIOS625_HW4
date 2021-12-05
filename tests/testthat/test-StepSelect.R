@@ -11,7 +11,7 @@ test_that("StepSelect works", {
     # "forward selection"
     m = lm(mpg ~ 1, data = mtcars)
     ref2 = stepAIC(m, direction="forward", k = log(n), scope=list(lower=m, upper=full_lm), trace = FALSE)
-    my2 = StepSelect(full_lm, direction = "forward", k = log(n), trace = TRUE)
+    my2 = StepSelect(full_lm, direction = "forward", k = log(n), trace = FALSE)
     expect_equal(my2$coefficients, ref2$coefficients)
     expect_equal(my2$call$formula, ref2$call$formula)
 })
