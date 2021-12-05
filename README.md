@@ -17,10 +17,7 @@ The R package LinReg.Select contains two functions, LinearReg and StepSelect. Th
 LinearReg takes two parameters, "theModel" and "data". "theModel" is the formula user can define. 
 For example, mpg ~ cyl + disp + hp, meaning that mpg is regressed on cyl, disp, and hp. 
 "data" should be the dataset the linear regression model is based on. 
-For example, 
-'''{r}
-LinearReg(mpg ~ cyl + disp + hp, data = mtcars)
-'''
+For example, LinearReg(mpg ~ cyl + disp + hp, data = mtcars).
 This function can also take interaction terms or terms with higher power. 
 For example, LinearReg(mpg ~ cyl + disp + hp + cyl*disp + I(hp^2), data = mtcars).
 
