@@ -14,23 +14,23 @@ The R package LinReg.Select contains two functions, LinearReg and StepSelect. Th
 
 ### Tutorial for LinearReg
 
-LinearReg takes two parameters, `@param` "theModel" and `@param` "data". 
+LinearReg takes two parameters, `@param theModel` and `@param data`. 
 
-`@param` "theModel" is the formula user can define. For example, mpg ~ cyl + disp + hp, meaning that mpg is regressed on cyl, disp, and hp. 
+`@param theModel` is the formula user can define. For example, mpg ~ cyl + disp + hp, meaning that mpg is regressed on cyl, disp, and hp. 
 
-`@param`"data" should be the dataset the linear regression model is based on. For example, LinearReg(mpg ~ cyl + disp + hp, data = mtcars).
+`@param data` should be the dataset the linear regression model is based on. For example, LinearReg(mpg ~ cyl + disp + hp, data = mtcars).
 
 This function can also take interaction terms or terms with higher power. 
 For example, LinearReg(mpg ~ cyl + disp + hp + cyl*disp + I(hp^2), data = mtcars).
 
 ### Tutorial for StepSelect
 
-StepSelect takes four parameters, `@param full`, `@direction` "direction", `@param` "k" and `@param` "trace".
+StepSelect takes four parameters, `@param full`, `@param direction`, `@param k`, and `@param trace`.
 
-`@param` "full" is the full model which backward selection process starts from or the upper limit model for forward selection. For example, full = lm(mpg ~ ., data = mtcars).
+`@param full` is the full model which backward selection process starts from or the upper limit model for forward selection. For example, full = lm(mpg ~ ., data = mtcars).
 
-`@param` "direction" can be either "backward" or "forward", indicating backward selection or forward selection. 
+`@param direction` can be either "backward" or "forward", indicating backward selection or forward selection. 
 
-`@param` "k" is the penalty used in AIC. "k" is 2 by default but user can define it. For more information, [refer to the function AIC](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/AIC).
+`@param k` is the penalty used in AIC. "k" is 2 by default but user can define it. For more information, [refer to the function AIC](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/AIC).
 
-`@param` "trace" equals FALSE by default, which means the process of the step selection will not be shown. To see the process of backward or forward selection, user can define "trace" to be TRUE. 
+`@param trace` equals FALSE by default, which means the process of the step selection will not be shown. To see the process of backward or forward selection, user can define "trace" to be TRUE. 
