@@ -4,6 +4,8 @@
   [![R build status](https://github.com/yw0817/BIOS625_HW4/workflows/R-CMD-check/badge.svg)](https://github.com/yw0817/BIOS625_HW4/actions)
 <!-- badges: end -->
 
+[![codecov](https://codecov.io/gh/yw0817/BIOS625_HW4/branch/main/graph/badge.svg?token=D42C7BUROA)](https://codecov.io/gh/yw0817/BIOS625_HW4)
+
 [![test-coverage](https://github.com/yw0817/BIOS625_HW4/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/yw0817/BIOS625_HW4/actions/workflows/test-coverage.yaml)
 
 ## LinReg.Select
