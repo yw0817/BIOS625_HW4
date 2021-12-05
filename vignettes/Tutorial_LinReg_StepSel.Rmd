@@ -42,6 +42,7 @@ ref = lm(mpg ~ cyl + disp + hp, data = mtcars)
 my.result = LinearReg(mpg ~ cyl + disp + hp, data = mtcars)
 
 all.equal(ref$coefficients, my.result$coefficients)
+all.equal(ref$residuals, my.result$residuals)
 all.equal(ref$fitted.values, my.result$fitted.values)
 ```
 
@@ -77,6 +78,7 @@ StepSelect(full_lm, direction = "backward", k = log(n), trace = TRUE)
 
 To check the result of my backward selection function with the reference function stepAIC:
 ```{r}
+library(MASS)
 ref = stepAIC(full_lm, direction = "backward", k = log(n), trace = FALSE)
 my = StepSelect(full_lm, direction = "backward", k = log(n), trace = FALSE)
 all.equal(ref$coefficients, my$coefficients)
@@ -85,7 +87,6 @@ all.equal(ref$call$formula, my$call$formula)
 
 To compare the efficiency of my backward selection function with stepAIC function:
 ```{r}
-library(MASS)
 result = bench::mark(stepAIC(full_lm, direction = "backward", k = log(n), trace = FALSE)$coefficients, StepSelect(full_lm, direction = "backward", k = log(n), trace = FALSE)$coefficients, )
 print(result)
 ```
