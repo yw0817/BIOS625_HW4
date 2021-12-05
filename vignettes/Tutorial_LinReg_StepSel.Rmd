@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(LinReg.Select)
+library(MASS)
 ```
 
 ### LinearReg
@@ -53,8 +54,6 @@ all.equal(ref$residuals, my.result$residuals)
 ```
 
 ```{r}
-install.packages("bench", repos="http://cran.us.r-project.org")
-library(bench)
 result1 = bench::mark(LinearReg(mpg ~ cyl + disp + hp, data = mtcars)$`Multiple R-squared`, summary(lm(mpg ~ cyl + disp + hp, data = mtcars))$r.squared)
 print(result1)
 
@@ -85,8 +84,6 @@ StepSelect(full_lm, direction = "backward", k = log(n), trace = TRUE)
 
 To check the result of my backward selection function with the reference function stepAIC:
 ```{r}
-install.packages("MASS", repos="http://cran.us.r-project.org")
-library(MASS)
 ref = stepAIC(full_lm, direction = "backward", k = log(n), trace = FALSE)
 my = StepSelect(full_lm, direction = "backward", k = log(n), trace = FALSE)
 all.equal(ref$coefficients, my$coefficients)
