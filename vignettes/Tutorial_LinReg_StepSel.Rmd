@@ -18,7 +18,6 @@ knitr::opts_chunk$set(
 install.packages("bench", repos="http://cran.us.r-project.org")
 install.packages("MASS", repos="http://cran.us.r-project.org")
 library(LinReg.Select)
-library(MASS)
 ```
 
 ### LinearReg
@@ -86,7 +85,7 @@ StepSelect(full_lm, direction = "backward", k = log(n), trace = TRUE)
 
 To check the result of my backward selection function with the reference function stepAIC:
 ```{r}
-ref = stepAIC(full_lm, direction = "backward", k = log(n), trace = FALSE)
+ref = MASS::stepAIC(full_lm, direction = "backward", k = log(n), trace = FALSE)
 my = StepSelect(full_lm, direction = "backward", k = log(n), trace = FALSE)
 all.equal(ref$coefficients, my$coefficients)
 all.equal(ref$call$formula, my$call$formula)
@@ -94,7 +93,7 @@ all.equal(ref$call$formula, my$call$formula)
 
 To compare the efficiency of my backward selection function with stepAIC function:
 ```{r}
-result = bench::mark(stepAIC(full_lm, direction = "backward", k = log(n), trace = FALSE)$coefficients, StepSelect(full_lm, direction = "backward", k = log(n), trace = FALSE)$coefficients, )
+result = bench::mark(MASS::stepAIC(full_lm, direction = "backward", k = log(n), trace = FALSE)$coefficients, StepSelect(full_lm, direction = "backward", k = log(n), trace = FALSE)$coefficients, )
 print(result)
 ```
 
@@ -113,7 +112,7 @@ StepSelect(full_lm, direction = "forward", k = log(n), trace = TRUE)
 To check the result of my backward selection function with the reference function stepAIC:
 ```{r}
 m = lm(mpg ~ 1, data = mtcars)
-ref2 = stepAIC(m, direction="forward", k = log(n), scope=list(lower=m, upper=full_lm), trace = FALSE)
+ref2 = MASS::stepAIC(m, direction="forward", k = log(n), scope=list(lower=m, upper=full_lm), trace = FALSE)
 my2 = StepSelect(full_lm, direction = "forward", k = log(n), trace = FALSE)
 all.equal(ref2$coefficients, my2$coefficients)
 all.equal(ref2$call$formula, my2$call$formula)
@@ -122,7 +121,7 @@ all.equal(ref2$call$formula, my2$call$formula)
 
 To compare the efficiency of my forward selection function with stepAIC function:
 ```{r}
-result = bench::mark(stepAIC(m, direction="forward", k = log(n), scope=list(lower=m, upper=full_lm), trace = FALSE)$coefficients, my2 = StepSelect(full_lm, direction = "forward", k = log(n), trace = FALSE)$coefficients)
+result = bench::mark(MASS::stepAIC(m, direction="forward", k = log(n), scope=list(lower=m, upper=full_lm), trace = FALSE)$coefficients, my2 = StepSelect(full_lm, direction = "forward", k = log(n), trace = FALSE)$coefficients)
 print(result)
 ```
 
