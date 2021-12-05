@@ -4,8 +4,8 @@ test_that("StepSelect works", {
     full_lm <- lm(mpg ~ ., data = mtcars)
     n = dim(mtcars)[1]
     # "backward selection"
-    ref = stepAIC(full_lm, direction = "backward", k = log(n), trace = FALSE)
-    my = StepSelect(full_lm, direction = "backward", k = log(n), trace = FALSE)
+    ref = stepAIC(full_lm, direction = "backward", k = log(n), trace = TRUE)
+    my = StepSelect(full_lm, direction = "backward", k = log(n), trace = TRUE)
     expect_equal(my$coefficients, ref$coefficients)
     expect_equal(my$call$formula, ref$call$formula)
     # "forward selection"
