@@ -10,7 +10,7 @@
 
 ### Introduction
 
-The R package LinReg.Select contains two functions, LinearReg and StepSelect. The function LinearReg generates linear regression model result with summary according to user defined formula and data set. The function StepSelect conducts either backward selection or forward selection based on AIC from a full model defined by user or or the null model. In this function, user can also define the the penalty used in AIC, k. To show the process of the backward or forward selection, user can turn on the trace option (trace = TRUE) in function StepSelect.
+The R package LinReg.Select contains two functions, LinearReg and StepSelect. The function LinearReg generates linear regression model result with summary according to user defined formula and data set. The function StepSelect conducts either backward selection or forward selection based on AIC from a full model defined by user or from the null model respectively. In this function, user can also define the the penalty used in AIC, k. To show the process of the backward or forward selection, user can turn on the trace option (trace = TRUE) in function StepSelect.
 
 ### Tutorial for LinearReg
 
