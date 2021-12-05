@@ -75,3 +75,4 @@ LinearReg = function(theModel, data){
     class(ret.result) = c("lm")
     return(ret.result)
 }
+

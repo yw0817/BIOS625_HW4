@@ -42,8 +42,8 @@ ref = lm(mpg ~ cyl + disp + hp, data = mtcars)
 my.result = LinearReg(mpg ~ cyl + disp + hp, data = mtcars)
 
 all.equal(ref$coefficients, my.result$coefficients)
-all.equal(ref$residuals, my.result$residuals)
 all.equal(ref$fitted.values, my.result$fitted.values)
+all.equal(ref$residuals, my.result$residuals)
 ```
 
 ```{r}
