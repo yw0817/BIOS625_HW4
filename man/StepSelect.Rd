@@ -20,9 +20,7 @@ the final linear regression result after selection
 Conduct forward or backward selection for linear regression models
 }
 \examples{
-full_lm = lm(mpg ~ ., data = mtcars)
-n = dim(mtcars)[1]
-StepSelect(full_lm, direction = "forward", k = log(n))
-StepSelect(full_lm, direction = "backward", trace = TRUE)
+StepSelect(lm(mpg ~ ., data = mtcars), direction = "forward")
+StepSelect(lm(mpg ~ ., data = mtcars), direction = "backward")
 
 }

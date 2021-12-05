@@ -5,6 +5,7 @@
 #'@param full the full model for backward selection to start and the upper limit for forward selection
 #'@param direction should be either "backward" or "forward"
 #'@param k numeric, the penalty per parameter to be used in AIC; the default k = 2 is the classical AIC.
+#'@param trace to determine if the process of selection will be shown or not
 #'
 #'@return the final linear regression result after selection
 #'

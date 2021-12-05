@@ -78,6 +78,7 @@ StepSelect(full_lm, direction = "backward", k = log(n), trace = TRUE)
 
 To check the result of my backward selection function with the reference function stepAIC:
 ```{r}
+install.packages("MASS", repos="http://cran.us.r-project.org")
 library(MASS)
 ref = stepAIC(full_lm, direction = "backward", k = log(n), trace = FALSE)
 my = StepSelect(full_lm, direction = "backward", k = log(n), trace = FALSE)
