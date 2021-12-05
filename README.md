@@ -27,5 +27,5 @@ StepSelect takes four parameters, "full", "direction", "k" and "trace".
 "full" is the full model which backward selection process starts from or the upper limit model for forward selection.
 For example, full = lm(mpg ~ ., data = mtcars).
 "direction" can be either "backward" or "forward", indicating backward selection or forward selection. 
-"k" is the penalty used in AIC. "k" is 2 by default but user can define it.
+"k" is the penalty used in AIC. "k" is 2 by default but user can define it. For more information, <https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/AIC>.
 "trace" equals FALSE by default, which means the process of the step selection will not be shown. To see the process of backward or forward selection, user can define "trace" to be TRUE. 
