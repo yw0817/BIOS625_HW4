@@ -44,7 +44,7 @@ To fit linear regression model without intercept:
 my.lm3 = LinearReg(mpg ~ -1 + cyl + disp + hp + cyl*disp, data = mtcars)
 ```
 
-
+To check the result of my linear regression function with the reference function lm:
 ```{r}
 ref = lm(mpg ~ cyl + disp + hp, data = mtcars)
 my.result = LinearReg(mpg ~ cyl + disp + hp, data = mtcars)
@@ -52,15 +52,22 @@ my.result = LinearReg(mpg ~ cyl + disp + hp, data = mtcars)
 all.equal(ref$coefficients, my.result$coefficients)
 all.equal(ref$fitted.values, my.result$fitted.values)
 all.equal(ref$residuals, my.result$residuals)
+all.equal(summary(ref)$r.squared, my.result$`Multiple R-squared`)
+all.equal(summary(ref)$adj.r.squared, my.result$`Adjusted R-squared`)
 ```
 
+The results of coefficients, fitted values, residuals, multiple R square, and adjusted R square are all the same. 
+
+To compare the efficiency of my linear regression function with reference function lm:
 ```{r}
-result1 = bench::mark(LinearReg(mpg ~ cyl + disp + hp, data = mtcars)$`Multiple R-squared`, summary(lm(mpg ~ cyl + disp + hp, data = mtcars))$r.squared)
+result1 = bench::mark(summary(lm(mpg ~ cyl + disp + hp, data = mtcars))$r.squared, LinearReg(mpg ~ cyl + disp + hp, data = mtcars)$`Multiple R-squared`)
 print(result1)
 
-result2 = bench::mark(LinearReg(mpg ~ cyl + disp + hp, data = mtcars)$`Adjusted R-squared`, summary(lm(mpg ~ cyl + disp + hp, data = mtcars))$adj.r.squared)
+result2 = bench::mark(summary(lm(mpg ~ cyl + disp + hp, data = mtcars))$adj.r.squared, LinearReg(mpg ~ cyl + disp + hp, data = mtcars)$`Adjusted R-squared`)
 print(result2)
 ```
+
+They are both pretty fast but the reference function lm is faster than my linear regression function.
 
 ### StepSelect
 
@@ -91,11 +98,15 @@ all.equal(ref$coefficients, my$coefficients)
 all.equal(ref$call$formula, my$call$formula)
 ```
 
+Comparing the final model and model coefficients, my backward selection function is the same as the reference function in R, stepAIC.
+
 To compare the efficiency of my backward selection function with stepAIC function:
 ```{r}
 result = bench::mark(MASS::stepAIC(full_lm, direction = "backward", k = log(n), trace = FALSE)$coefficients, StepSelect(full_lm, direction = "backward", k = log(n), trace = FALSE)$coefficients, )
 print(result)
 ```
+
+The reference function is only 20ms faster than my backward selection function. 
 
 #### Forward Selection
 
@@ -118,6 +129,7 @@ all.equal(ref2$coefficients, my2$coefficients)
 all.equal(ref2$call$formula, my2$call$formula)
 ```
 
+Comparing the coefficients and final model from forward selection, my function is the same as the reference function stepAIC. 
 
 To compare the efficiency of my forward selection function with stepAIC function:
 ```{r}
@@ -125,3 +137,4 @@ result = bench::mark(MASS::stepAIC(m, direction="forward", k = log(n), scope=lis
 print(result)
 ```
 
+My forward selection function has about the same efficiency as the reference function stepAIC. 
